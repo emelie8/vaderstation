@@ -1,7 +1,31 @@
+/* 
+Applikation: Väderstation
+Skapad av: Emelie Johansen
+Skapad: 2022-01-02
+Version: 1.0.0
+*/
+
+/*
+Det här programmet är en vaderstation som börjar med att be användaren mata in namn och temperatur
+för ett antal valfria städer. Temperaturen kontrolleras så att den ligger mellan -60 och +60 grader.
+Efter detta kan användaren söka efter en viss temperatur och om den hittas så skrivs namnet på staden 
+och den tillhörande temperaturen på skärmen. Annars visas ett meddelande om att den inte kunde hittas.
+Sökningen sker linjärt genom hela arrayen.
+
+Sedan sorteras de inmatade städerna efter temperatur där den med lägst temperatur kommer först. 
+
+Efter det får användaren söka efter en temperatur igen, men den här gången sker sökningen binärt.
+
+Programmet avslutas med att städerna med högst respektive lägst temperatur skrivs ut på skärmen och
+sedan ett avslutsmeddelande.
+*/
+
 #include <iostream>
 
 using namespace std;
 
+// Skapa klassen Stad med tillhörande medlemsvariabler och metoder
+// för att kunna lagra städernas namn och temperaturer
 class Stad {
 
     // Klassen innehåller två attribut
@@ -10,6 +34,8 @@ class Stad {
     string namn;
     int temp;
 
+    // Alla metoder i klassen är publika och kan användas av alla
+    // som kommer åt objekten
     public:
 
         // Metod för att returnera en sträng med bägge värden från ett objekt
@@ -37,7 +63,7 @@ class Stad {
 
 };
 
-// Funktion för att hitta den högsta temperaturen i arrayen och
+// Metod för att hitta den högsta temperaturen i arrayen och
 // returnera indexnumret för den post som var högst
 int hogstTemp(Stad stader[], int n) {
     int index = 0;
@@ -52,7 +78,7 @@ int hogstTemp(Stad stader[], int n) {
     return index;
 }
 
-// Funktion för att hitta den lägsta temperaturen i arrayen och
+// Metod för att hitta den lägsta temperaturen i arrayen och
 // returnera indexnumret för den post som var lägst
 int lagstTemp(Stad stader[], int n) {
     int index = 0;
@@ -67,8 +93,8 @@ int lagstTemp(Stad stader[], int n) {
     return index;
 }
 
-// Funktion för att hitta en stad med en temperatur som
-// motsvarar eftersökt temperatur. Funktionen söker 
+// Metod för att hitta en stad med en temperatur som
+// motsvarar eftersökt temperatur. Metoden söker 
 // linjärt genom hela arrayen
 int linSok(Stad stader[], int sokTemp, int n) {
     for(int i=0; i < n; i++) {    
@@ -79,7 +105,7 @@ int linSok(Stad stader[], int sokTemp, int n) {
     return -1;
 }
 
-// Funktion för att sortera hela arrayen med hjälp av
+// Metod för att sortera hela arrayen med hjälp av
 // algoritmen bubblesort
 void bubbleSort(Stad stader[], int n) {
     string tempStad;
@@ -96,8 +122,8 @@ void bubbleSort(Stad stader[], int n) {
     }
 }
 
-// Funktion för att hitta en stad med en temperatur som
-// motsvarar eftersökt temperatur. Funktionen söker 
+// Metod för att hitta en stad med en temperatur som
+// motsvarar eftersökt temperatur. Metoden söker 
 // binärt genom hela arrayen
 int binSok(Stad stader[], int v, int h, int sokTemp)
 {
@@ -128,7 +154,7 @@ int main() {
     string inputNamn, tempStad;
     int inputTemp, sokTemperatur, tempTemp;
 
-    // Variabel för att lagra sökresultatet från sökfunktionerna
+    // Variabel för att lagra sökresultatet från sökmetoderna
     int sokRes;
 
     // Variabel för att användas i while-loopen där temperatur kontrolleras
@@ -181,7 +207,7 @@ int main() {
     cout << "\nVilken temperatur vill du söka efter med linjärsökning? Ange värde: ";
     cin >> sokTemperatur;
 
-    // Ansopa funktionen linSok för att söka linjärt i arrayen om temperaturen finns där 
+    // Anropa metoden linSok för att söka linjärt i arrayen om temperaturen finns där 
     sokRes = linSok(stader, sokTemperatur, n);
 
     // Visa resultatet av sökningen
@@ -199,7 +225,7 @@ int main() {
         cout << "\nstader[" << i << "].toString(): " << stader[i].toString() << "\n";
     }
 */  
-    // Sortera arrayen genom att anropa funktionen bubblesort
+    // Sortera städerna efter temperatur genom att anropa metoden bubblesort
     bubbleSort(stader, n);
 
 // Avkommentera nedan om du vill se hur arayen ser ut sorterad
@@ -215,7 +241,7 @@ int main() {
     cout << "\nVilken temperatur vill du söka efter med binärsökning? Ange värde: ";
     cin >> sokTemperatur;
 
-    // Ansopa funktionen binSok för att söka binärt i arrayen om temperaturen finns där
+    // Anropa metoden binSok för att söka binärt i arrayen om temperaturen finns där
     sokRes = binSok(stader, 0, n, sokTemperatur);
 
     // Visa resultatet av sökningen
@@ -225,12 +251,12 @@ int main() {
         cout << "\nStaden " << stader[sokRes].getNamn() << " har eftersökt temperatur på " << stader[sokRes].getTemp() << " grader. (binärsökning)\n";
     }
 
-    // Anropa funktionen hogstTemp för att ta reda på vilken stad som har högst temperatur i arrayen
+    // Anropa metoden hogstTemp för att ta reda på vilken stad som har högst temperatur i arrayen
     // och skriv ut den på skärmen
     cout << "Staden med högst temperatur är " << stader[hogstTemp(stader, n)].getNamn() << " med " << 
         stader[hogstTemp(stader, n)].getTemp() << " grader.\n";
 
-    // Anropa funktionen lagstTemp för att ta reda på vilken stad som har lägst temperatur i arrayen
+    // Anropa metoden lagstTemp för att ta reda på vilken stad som har lägst temperatur i arrayen
     // och skriv ut den på skärmen
     cout << "Staden med lägst temperatur är " << stader[lagstTemp(stader, n)].getNamn() << " med " << 
         stader[lagstTemp(stader, n)].getTemp() << " grader.\n";
@@ -241,3 +267,27 @@ int main() {
     return 0;
 }
 
+
+/* 
+Utvärdering
+
+I den här uppgiften fick jag chansen att lära mig mer om klasser, objekt, medlemsattribut 
+och tillhörande metoder. För mig var detta väldigt nytt och lite svårare än de tidigare 
+uppgifterna. 
+
+Det var också intressant att få lite inblick i olika typer av sök- och sorteringsalgoritmer
+med linjärsök, binärsök och bubblesort. 
+
+Användarvänligheten är hög eftersom alla frågor är logiska och självförklarande. Programmet 
+skriver löpande ut information på skärmen åt användaren.
+
+På en riktig väderstation skulle alla mätvärden samlas in automatiskt från olika sensorer som
+är utplacerade i världen. I mitt program får användaren själv mata in värden vilket är lite
+konstigt. Framtida versioner av programmet kanske skulle kunna koppla upp sig mot en publik 
+vädertjänst som har alla mätvärden i en databas. 
+
+Framtida versioner bör också kompletteras med robusta felkontroller som kontrollerar alla
+inmatningar användaren gör innan variablarna används i simulatorn. Oväntade fel behöver
+också fångas upp och hanteras på ett snyggt sätt så att informativa felmeddelanden skrivs
+ut på skärmen.
+*/
