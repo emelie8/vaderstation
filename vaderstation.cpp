@@ -246,9 +246,10 @@ int main() {
 
     // Visa resultatet av sökningen
     if (sokRes == -1) {
-        cout << "\nKunde tyvärr inte hitta någon stad med temperaturen " << sokTemperatur << " grader. (binärsökning)\n";
+        cout << "\n\nKunde tyvärr inte hitta någon stad med temperaturen " << sokTemperatur << " grader. (binärsökning)\n\n";
     } else {
-        cout << "\nStaden " << stader[sokRes].getNamn() << " har eftersökt temperatur på " << stader[sokRes].getTemp() << " grader. (binärsökning)\n";
+        cout << "\n\nStaden " << stader[sokRes].getNamn() << " har eftersökt temperatur på " 
+            << stader[sokRes].getTemp() << " grader. (binärsökning)\n\n";
     }
 
     // Anropa metoden hogstTemp för att ta reda på vilken stad som har högst temperatur i arrayen
@@ -262,7 +263,7 @@ int main() {
         stader[lagstTemp(stader, n)].getTemp() << " grader.\n";
 
     // Skriv ut en avslutande hälsning
-    cout << "Tack för att du använde väderstationen!\n";
+    cout << "\n\nTack för att du använde väderstationen!\n\n";
 
     return 0;
 }
